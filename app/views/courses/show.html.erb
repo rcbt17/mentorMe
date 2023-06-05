@@ -1,2 +1,12 @@
-<%= @course.name %>
-<%= @course.description %>
+<h2><%= @course.name %></h2>
+<p>
+  <%= @course.description %>
+</p>
+<%= cl_image_tag @course.poster.key, height: 300, width: 400, crop: :fill, class: "img-fluid" %>
+
+<% if @course.user == current_user %>
+<hr>
+<%= link_to "Edit Course", edit_course_path(@course), class: "btn btn-info" %>
+<%= link_to "Delete", course_path(@course), class: "btn btn-danger text-white float-end",
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure? Deleting this course will remove all lessons and statistics for others!"}%>
+<% end %>

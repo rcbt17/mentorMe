@@ -80,3 +80,5 @@ end
 gem "devise"
 #pundit
 gem "pundit"
+#cloudinary
+gem "cloudinary"
