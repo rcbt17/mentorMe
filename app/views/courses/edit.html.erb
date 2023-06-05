@@ -1,0 +1,9 @@
+
+<h2>Edit Course Details</h2>
+
+<%= simple_form_for(@course) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :poster, as: :file %>
+  <%= f.submit %>
+<% end %>
