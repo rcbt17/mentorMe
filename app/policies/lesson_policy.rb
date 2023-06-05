@@ -1,15 +1,10 @@
 class LessonPolicy < ApplicationPolicy
   def index?
     true
-    scope.all
   end
 
   def show?
-    record.user == user
-  end
-
-  def create?
-    record.user == user
+    true
   end
 
   def edit?
@@ -21,11 +16,14 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def new?
-    record.user == user
+    user == record.course.user
   end
 
+  def create?
+    new?
+  end
 
-class Scope < Scope
+  class Scope < Scope
     def resolve
       scope.all
     end
