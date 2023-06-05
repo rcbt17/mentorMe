@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   belongs_to :user
+  has_many :users, through: :course_subscriptions
   has_one_attached :poster
 
   validates :name, presence: true, length: { minimum: 3, maximum: 32 }
