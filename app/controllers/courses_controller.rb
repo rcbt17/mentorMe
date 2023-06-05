@@ -9,6 +9,7 @@ class CoursesController < ApplicationController
 
   def show
     authorize @course
+    @lessons = Lesson.where(course: @course)
   end
 
   def new

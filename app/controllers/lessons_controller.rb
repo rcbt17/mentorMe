@@ -1,5 +1,6 @@
 class LessonsController < ApplicationController
-  before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+  before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[new create]
 
   def index
     @lessons = Lesson.all
@@ -8,12 +9,19 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    @lesson.user = current_user
+    @lesson.course = @course
     authorize @lesson
+    if @lesson.save
+      redirect_to course_path(@course)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def new
     @lesson = Lesson.new
+    @course = Course.find(params[:course_id])
+    @lesson.course = @course
     authorize @lesson
   end
 
@@ -37,7 +45,11 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
   end
 
+  def set_course
+    @course = Course.find(params[:course_id])
+  end
+
   def lesson_params
-    params.require(:lesson).permit(:name, :description, :video_url, :post_content, :course_id)
+    params.require(:lesson).permit(:name, :description, :video, :course_id)
   end
 end
