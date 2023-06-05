@@ -78,3 +78,5 @@ end
 
 #devise
 gem "devise"
+#pundit
+gem "pundit"
