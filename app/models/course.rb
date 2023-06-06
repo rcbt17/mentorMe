@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :user
   has_many :course_subscriptions, dependent: :destroy
+  belongs_to :category
   has_one_attached :poster
   has_many :lesson, dependent: :destroy
 
