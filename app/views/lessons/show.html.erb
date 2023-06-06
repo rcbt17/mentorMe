@@ -8,3 +8,20 @@
   {:height=>400, :width=>790, :crop=>"fill"}
   ])
    %>
+<hr>
+<h3>Last 10 Topics</h3>
+<% @last_topics.each do |topic| %>
+  <div class="card">
+    <div class="card-body">
+      <h5><%= topic.title %></h5><br>
+      <small class="text-muted"> By <%= topic.user.first_name %> </small>
+      <p><%= topic.content %></p>
+    </div>
+  </div>
+<% end %>
+<h3> Start a topic on the lesson </h3>
+<%= simple_form_for [@lesson.course, @lesson, @topic] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.submit class: "btn btn-info" %>
+<% end %>

@@ -17,6 +17,7 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
+    @categories = Category.all
     authorize @course
   end
 
