@@ -1,0 +1,10 @@
+<% if (current_user != @course.user) %>
+  <% if CourseSubscription.user_subscribed?(current_user, @course) %>
+    <%= link_to "Subscribed", "#", class: "btn btn-info disabled" %>
+  <% else %>
+    <%= button_to course_subscribe_path(@course), class: "btn btn-info" do %>
+      <i class="fa-solid fa-square-plus"></i> Join Course
+    <% end %>
+  <% end %>
+<% end %>
+<p>
