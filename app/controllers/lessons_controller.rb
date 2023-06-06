@@ -27,6 +27,8 @@ class LessonsController < ApplicationController
 
   def show
     authorize @lesson
+    @topic = Topic.new
+    @last_topics = Topic.where(lesson: @lesson).order("id DESC").last(10)
     unless subscribed?
       flash['alert'] = "You need to join the course to view it's contents"
       redirect_to course_path(@lesson.course)
