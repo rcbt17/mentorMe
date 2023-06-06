@@ -1,9 +1,8 @@
 <h2>Create a new Course</h2>
-
 <%= simple_form_for(@course) do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
-  <%= f.select :category, Category.all.collect {|c| [ c.category, c.id ] } %>
+  <%= f.input :category, :collection => @categories,:label_method => :category,:value_method => :id,:label => "Category" ,:include_blank => false %>
   <%= f.input :poster, as: :file %>
   <%= f.submit class: "btn btn-info" %>
 <% end %>
