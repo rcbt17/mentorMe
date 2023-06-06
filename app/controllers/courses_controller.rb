@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
 
   def show
     authorize @course
+    @course_subscriptions = current_user.course_subscriptions
     @lessons = Lesson.where(course: @course)
   end
 
