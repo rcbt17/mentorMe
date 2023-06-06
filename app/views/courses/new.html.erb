@@ -1,8 +1,13 @@
 <h2>Create a new Course</h2>
+<% category_array = []  %>
+<% Category.all.each do |category|  %>
+<% category_array.push(category.category)  %>
+<% end %>
 
 <%= simple_form_for(@course) do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
+  <%= f.select :category, Category.all.collect {|c| [ c.category, c.id ] } %>
   <%= f.input :poster, as: :file %>
   <%= f.submit class: "btn btn-info" %>
 <% end %>

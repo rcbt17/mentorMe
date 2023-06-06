@@ -3,6 +3,12 @@
   <%= @course.description %>
 </p>
 <%= cl_image_tag @course.poster.key, height: 300, width: 400, crop: :fill, class: "img-fluid" %>
+<p>
+  <i class="fa-solid fa-book-atlas"></i>
+  <%=  @course.category.category %>
+</p>
+
+
 
 <% if @course.user == current_user %>
 <hr>
