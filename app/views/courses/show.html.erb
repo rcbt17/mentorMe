@@ -1,9 +1,5 @@
 <h2><%= @course.name %></h2>
-<% if (current_user != @course.user) && (!CourseSubscription.user_subscribed?(current_user, @course)) %>
-  <%= button_to course_subscribe_path(@course), class: "btn btn-info" do %>
-    <i class="fa-solid fa-square-plus"></i> Join Course
-  <% end %>
-<% end %>
+<%= render 'courses/subscribe' %>
 <p>
   <%= @course.description %>
 </p>

@@ -27,6 +27,10 @@ class LessonsController < ApplicationController
 
   def show
     authorize @lesson
+    unless subscribed?
+      flash['alert'] = "You need to join the course to view it's contents"
+      redirect_to course_path(@lesson.course)
+    end
   end
 
   def edit
@@ -51,5 +55,9 @@ class LessonsController < ApplicationController
 
   def lesson_params
     params.require(:lesson).permit(:name, :description, :video, :course_id)
+  end
+
+  def subscribed?
+     current_user == @lesson.course.user || CourseSubscription.user_subscribed?(current_user, @lesson.course)
   end
 end
