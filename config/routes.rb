@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   resources :courses do
+    post '/reviews', to: 'reviews#create'
     post '/subscribe', to: 'course_subscriptions#create'
   end
 
