@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_141800) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_091946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_141800) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "course_subscriptions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -57,6 +63,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_141800) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_courses_on_category_id"
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
@@ -92,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_141800) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "course_subscriptions", "courses"
   add_foreign_key "course_subscriptions", "users"
+  add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"
   add_foreign_key "lessons", "courses"
 end
