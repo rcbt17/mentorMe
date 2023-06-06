@@ -1,7 +1,6 @@
 class CourseSubscriptionsController < ApplicationController
   before_action :set_course, only: %i[create]
 
-
   helper_method :is_user_subscribed?
 
   def create
