@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
     policy_scope(Course)
+
   end
 
   def show
@@ -18,7 +19,9 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
+    @course = Course.new(course_params.except(:category))
+    category = Category.find(params[:course][:category])
+    @course.category = category
     @course.user = current_user
     authorize @course
     if @course.save
@@ -55,6 +58,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:name, :description, :poster)
+    params.require(:course).permit(:name, :description, :poster, :category)
   end
 end

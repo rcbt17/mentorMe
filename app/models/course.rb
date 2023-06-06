@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   belongs_to :user
+  belongs_to :category
   has_many :users, through: :course_subscriptions
   has_one_attached :poster
 
