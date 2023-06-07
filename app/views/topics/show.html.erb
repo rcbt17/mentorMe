@@ -1,2 +1,24 @@
-<h3><%= @topic.title %></h3>
-<p><%= @topic.content %></p>
+<div class="card bg-info-subtle my-3 border-0 border-5 border-start border-primary-subtle">
+      <div class="card-body">
+        <h5><%= @topic.title %></h5>
+        <br>
+        <small class="text-muted"> By <%= @topic.user.first_name %> </small>
+        <p><%= @topic.content %></p>
+      </div>
+    </div>
+<hr>
+<h5>Community Replies</h5>
+<% @posts.each do |post| %>
+    <div class="card bg-info-subtle my-3 border-0 border-5 border-start border-danger-subtle">
+      <div class="card-body">
+        <h5><%= post.user.nickname %></h5>
+        <br>
+        <p><%= simple_format(post.content) %></p>
+      </div>
+    </div>
+<% end %>
+<%= simple_form_for @post do |f| %>
+  <%= f.hidden_field :topic_id, value: @topic.id %>
+  <%= f.input :content, label: "Post your reply" %>
+  <%= f.submit class: "btn btn-info" %>
+<% end %>

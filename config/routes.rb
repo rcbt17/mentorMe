@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     post '/subscribe', to: 'course_subscriptions#create'
   end
 
+  # Handling posts
+    post '/posts', to: 'posts#create'
 end

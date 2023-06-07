@@ -80,6 +80,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_083216) do
     t.index ["course_id"], name: "index_lessons_on_course_id"
   end
 
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "topic_id", null: false
+    t.integer "votes"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
   create_table "reviews", force: :cascade do |t|
     t.text "description"
     t.integer "stars"
@@ -125,6 +136,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_083216) do
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"
   add_foreign_key "lessons", "courses"
+  add_foreign_key "posts", "topics"
+  add_foreign_key "posts", "users"
   add_foreign_key "reviews", "courses"
   add_foreign_key "reviews", "users"
   add_foreign_key "topics", "lessons"
