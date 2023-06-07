@@ -5,7 +5,6 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
     policy_scope(Course)
-
   end
 
   def show
@@ -13,6 +12,7 @@ class CoursesController < ApplicationController
     @course_subscriptions = current_user.course_subscriptions
     @lessons = Lesson.where(course: @course)
     @review = Review.new
+    @reviews = Review.all.where(course: @course).order("id DESC").first(10)
   end
 
   def new

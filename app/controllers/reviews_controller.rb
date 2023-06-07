@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.course = Course.find(params[:course_id])
+    @review.user_id = current_user.id
     authorize @review
     if @review.save
       flash[:notice] = "Thanks for your review!"

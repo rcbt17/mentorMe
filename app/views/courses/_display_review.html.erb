@@ -1,0 +1,18 @@
+<hr>
+
+<h2> Last 10 reviews</h2>
+
+<% @reviews.each do |review| %>
+<div class="card">
+    <div class="card-body">
+      <%= review.description %>
+        <% review.stars.times do %>
+        <span class="fa-solid fa-star"></span>
+          <% end  %>
+  </div>
+      <div class="card-body">
+        <%= review.user.nickname %>
+        <%= review.created_at.strftime("%d/%m/%Y") %>
+      </div>
+</div>
+<% end %>
