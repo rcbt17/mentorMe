@@ -80,7 +80,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_083216) do
     t.index ["course_id"], name: "index_lessons_on_course_id"
   end
 
-
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "topic_id", null: false
@@ -91,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_083216) do
     t.index ["topic_id"], name: "index_posts_on_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
+
   create_table "reviews", force: :cascade do |t|
     t.text "description"
     t.integer "stars"

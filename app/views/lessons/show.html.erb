@@ -1,13 +1,17 @@
 <h2><%= @lesson.name %></h2>
 <p><%= @lesson.description %></p>
 <hr>
-<%= cl_video_tag(@lesson.video.key,
+<h4 id="timer"></h4>
+<div data-controller="plyr">
+  <%= cl_video_tag(@lesson.video.key,
   :loop => true, :controls => true,
+  id: "course-player",
   :fallback_content => "Your browser does not support HTML5 video tags.",
   :transformation=>[
   {:height=>400, :width=>790, :crop=>"fill"}
   ])
    %>
+</div>
 <hr>
 <h3>Last 10 Topics</h3>
 <% @last_topics.each do |topic| %>
