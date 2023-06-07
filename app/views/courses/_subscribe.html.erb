@@ -1,10 +1,9 @@
 <% if (current_user != @course.user) %>
   <% if CourseSubscription.user_subscribed?(current_user, @course) %>
-    <%= link_to "Subscribed", "#", class: "btn btn-info disabled" %>
+    <%= link_to "Unsubscribe", course_unsubscribe_path(@course),  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-info" %>
   <% else %>
     <%= button_to course_subscribe_path(@course), class: "btn btn-info" do %>
       <i class="fa-solid fa-square-plus"></i> Join Course
     <% end %>
   <% end %>
 <% end %>
-<p>
