@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :courses do
     post '/reviews', to: 'reviews#create'
     post '/subscribe', to: 'course_subscriptions#create'
-    
+    delete '/unsubscribe', to: 'course_subscriptions#destroy'
   end
 
   # Handling posts

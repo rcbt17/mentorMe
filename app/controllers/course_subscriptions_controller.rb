@@ -1,5 +1,5 @@
 class CourseSubscriptionsController < ApplicationController
-  before_action :set_course, only: %i[create]
+  before_action :set_course, only: %i[create destroy]
 
 
   def create
@@ -15,6 +15,14 @@ class CourseSubscriptionsController < ApplicationController
       flash[:alert] = "You are already enrolled to this course"
       redirect_to course_path(@course)
     end
+  end
+
+  def destroy
+    @subscription = CourseSubscription.where(user: current_user, course: @course)
+    authorize @subscription
+    @subscription.first.destroy
+    flash[:notice] = "You have sucessfully unsubscribed from this course"
+    redirect_to course_path(@course)
   end
 
   private

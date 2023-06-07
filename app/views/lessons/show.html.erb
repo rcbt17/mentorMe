@@ -1,8 +1,8 @@
 <h2><%= @lesson.name %></h2>
 <p><%= @lesson.description %></p>
 <hr>
-<h4 id="timer"></h4>
 <div data-controller="plyr">
+  <p>TimeStamp: <span id="demo"></span></p>
   <%= cl_video_tag(@lesson.video.key,
   :loop => true, :controls => true,
   id: "course-player",
@@ -18,7 +18,7 @@
   <%= link_to course_lesson_topic_path(@lesson.course, @lesson, topic), class: "text-decoration-none" do%>
     <div class="card bg-info-subtle my-3 border-0 border-5 border-start border-primary-subtle">
       <div class="card-body">
-        <h5><%= topic.title %></h5>
+        <h5><%= topic.title %> <span class="badge bg-dark"><%= Time.at(topic.timestamp).utc.strftime("%M:%S") %></span></h5>
         <br>
         <small class="text-muted"> By <%= topic.user.first_name %> </small>
         <p><%= topic.content %></p>
@@ -30,5 +30,6 @@
 <%= simple_form_for [@lesson.course, @lesson, @topic] do |f| %>
   <%= f.input :title %>
   <%= f.input :content %>
+  <%= f.text_field :timestamp, value: 0, id: "timestamp", type: "hidden"  %>
   <%= f.submit class: "btn btn-info" %>
 <% end %>
