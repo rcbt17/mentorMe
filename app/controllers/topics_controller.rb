@@ -2,6 +2,9 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @topics = Topic.all
+    @post = Post.new
+    @posts = Post.where(topic: @topic).order("id DESC")
     authorize @topic
   end
 
