@@ -1,11 +1,16 @@
+<% if (current_user != @course.user) %>
+  <% if !Review.user_reviewed?(current_user, @course) %>
 <h2>Create a new Review</h2>
-
-<%= simple_form_for [@course, @review] do |f| %>
+  <%= simple_form_for [@course, @review] do |f| %>
   <%= f.input :description %>
   <%= f.label :Stars %> <br>
-  <%= f.collection_radio_buttons :stars, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
+  <%= f.collection_radio_buttons :stars, [[1], [2], [3], [4], [5]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
     <%= b.radio_button + b.label {''} %>
   <% end %> <br>
 <hr>
   <%= f.submit class: "btn btn-info" %>
+<% end %>
+
+
+    <% end %>
 <% end %>
