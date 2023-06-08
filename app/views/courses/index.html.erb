@@ -1,10 +1,24 @@
-<h2>All Courses</h2>
-<ul>
-<% @courses.each do |course| %>
-  <li>
-    <%= course.name %>
-    <%= link_to "View Course", course_path(course), class: "btn btn_link" %>
-  </li>
+<br>
+
+
+<div class= "m-5">
+<%= link_to new_course_path, class: 'button-23 text-white on-right' do %>
+    Create a course <i class="fa-solid fa-plus"></i>
 <% end %>
-</ul>
-<%= link_to "Add Course", new_course_path, class: "btn btn-info", style: "color: yellow;" %>
+<p class="on-left"> Total of <span class="text-muted "> <%= pluralize(@courses.count, 'course') %></p></span>
+</div>
+<div class= "container text-center">
+<main class="grid">
+
+        <% @courses.each do |course| %>
+  <article class= "card-wrap">
+        <%= cl_image_tag course.poster.key, crop: :fill, class: "img-fluid" %>
+      <p class= "text-muted fst-italic"><%= pluralize(course.lessons.count, 'lesson') %></p>
+    <div class="text">
+      <h3 class= "mt-2 path"><%= link_to course.name,  course_path(course) ,class: "hide" %></h3>
+      <p><%= course.description %></p>
+    </div>
+  </article>
+      <% end %>
+</main>
+</div>
