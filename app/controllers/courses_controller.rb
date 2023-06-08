@@ -13,6 +13,7 @@ class CoursesController < ApplicationController
     @lessons = Lesson.where(course: @course)
     @review = Review.new
     @reviews = Review.all.where(course: @course).order("id DESC").first(10)
+
   end
 
   def new
