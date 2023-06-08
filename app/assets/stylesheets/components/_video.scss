@@ -8,9 +8,22 @@
   top: 0;
   bottom: 0;
   z-index: -1;
-  filter:opacity(90%);
 }
 
+.overlay {
+  padding-top:30vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100vw;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(20, 18, 18, 0.1),
+    rgba(0, 0, 0, 1)
+  );
+  width: 100vw;
+}
 h1, h2 {
   text-align: center;
 }
