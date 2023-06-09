@@ -1,20 +1,46 @@
-<h2>Log in</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<div class="auth-wrapper">
+  <div class="login-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <h3 class="mb-2">Login Now</h3>
+          <hr class="text-muted">
+          <div class="bg-white shadow rounded">
+            <div class="row">
+              <div class="col-md-7 pe-0">
+                <div class="form-left h-100 py-5 px-5">
+                  <%= simple_form_for(resource, as: resource_name, class: "row-g4", url: session_path(resource_name)) do |f| %>
+                    <div class="form-inputs">
+                      <%= f.input :email,
+                          required: false,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" } %>
+                      <%= f.input :password,
+                          required: false,
+                          input_html: { autocomplete: "current-password" } %>
+                      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                    </div>
+                    <div class="form-actions">
+                      <%= f.button :submit, "Log in", class: "btn btn-info" %>
+                    </div>
+                  <% end %>
+                  <%= render "devise/shared/links" %>
+                </div>
+              </div>
+              <div class="col-md-5 ps-0 d-none d-md-block">
+                <div class="form-right h-100 bg-info text-white text-center pt-5">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                  <h2 class="fs-4">@mentorME</h2>
+                  <hr>
+                  <p class="text-start my-3 px-3"><small>@mentorME is an open-source, open-learning, P2P platform designed to
+                    facilitate easy information access for students and to create incentives for
+                    field masters to pick up mentoring!</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
