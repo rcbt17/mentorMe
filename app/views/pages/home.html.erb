@@ -1,23 +1,27 @@
 <div class="wrapper">
-
-      <video  id="background-video" autoplay loop muted >
-      <source src="https://res.cloudinary.com/devnbwk8s/video/upload/v1686218628/pexels-pressmaster-3209298-3840x2160-25fps_1_dh0mcc.mp4" type="video/mp4">
-      </video>
+  <video  id="background-video" autoplay loop muted >
+    <source src="https://res.cloudinary.com/devnbwk8s/video/upload/v1686218628/pexels-pressmaster-3209298-3840x2160-25fps_1_dh0mcc.mp4" type="video/mp4">
+  </video>
 </div>
 <div class="overlay">
-    <div class="row mt-5">
-        <div class="col-md-7 mt-5 mx-auto">
-            <div class="small fw-light"></div>
-            <form >
-            <div class="input-group">
-                <input class="form-control border-end-0 border home-searchbar text-secondary text-capitalize" name="query" type="search" placeholder="I want to start leaarning..." id="search-input">
-                <span class="input-group-append">
-                    <button class="btn btn-outline-secondary icon-search bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
-            </form>
+  <div class="row mt-5">
+    <div class="col-md-7 mt-5 mx-auto">
+      <div class="small fw-light"></div>
+      <form >
+        <div class="input-group">
+          <input class="form-control border-end-0 border home-searchbar text-secondary text-capitalize" name="query" type="search" placeholder="I want to start leaarning..." id="search-input">
+          <span class="input-group-append">
+            <button class="btn btn-outline-secondary icon-search bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
         </div>
+      </form>
+      <div class="home-links float-end">
+        <%= link_to "home", root_path %>
+        <%= link_to "courses", courses_path %>
+        <%= link_to "mentor", new_course_path %>
+      </div>
     </div>
+  </div>
 </div>

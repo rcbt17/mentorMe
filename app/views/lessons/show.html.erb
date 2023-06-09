@@ -33,3 +33,11 @@
   <%= f.text_field :timestamp, value: 0, id: "timestamp", type: "hidden"  %>
   <%= f.submit class: "btn btn-info" %>
 <% end %>
+<script>
+let aud = document.getElementById("course-player");
+aud.ontimeupdate = function () { getVideoTime() };
+
+function getVideoTime() {
+  document.getElementById("timestamp").value = Math.round(aud.currentTime);
+}
+</script>
