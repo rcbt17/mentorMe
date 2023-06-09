@@ -1,56 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="#">mentorme</a>
+    <%= link_to root_path, class: "navbar-brand text-muted" do %>@mentorME
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to "Home", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Courses", courses_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Categories", courses_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Become a student", courses_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Become a mentor", courses_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item dropdown">
+          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
           </a>
-          <div class="dropdown-menu">
-            <ul>
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-
-            </ul>
-            <ul>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-
-            </ul>
-            <ul>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-              <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
-
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Action", "#", class: "dropdown-item" %>
+              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
-      </form>
     </div>
   </div>
-</nav>
+</div>
