@@ -9,7 +9,11 @@ class CoursesController < ApplicationController
 
   def show
     authorize @course
-    @course_subscriptions = current_user.course_subscriptions
+    if user_signed_in?
+      @course_subscriptions = current_user.course_subscriptions
+    else
+      @course_subscriptions = false
+    end
     @lessons = Lesson.where(course: @course)
     @review = Review.new
     @reviews = Review.all.where(course: @course).order("id DESC").first(10)
@@ -54,6 +58,7 @@ class CoursesController < ApplicationController
     flash[:alert] = "You have successfully deleted a course!"
     redirect_to courses_path, status: :see_other
   end
+
 
   private
 
