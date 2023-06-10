@@ -15,8 +15,15 @@
           <li class="nav-item">
             <%= link_to "Browse Courses", courses_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Categories", courses_path, class: "nav-link" %>
+          <li class="nav-item dropdown">
+          <a href="#" class="nav-link"  id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              by category
+          </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <% Category.all.each do |category| %>
+              <%= link_to category.category, "#{courses_path}?category=#{category.category}", class: "dropdown-item" %>
+              <% end %>
+            </div>
           </li>
           <li class="nav-item">
             <%= link_to "Become a mentor", new_course_path, class: "nav-link" %>
