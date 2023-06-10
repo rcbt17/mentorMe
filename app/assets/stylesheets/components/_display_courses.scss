@@ -20,7 +20,7 @@
 }
 .grid > article img {
   width: 100%;
-  height: 190px;
+  height: 210px;
   object-fit: cover;
 }
 
@@ -37,9 +37,10 @@
   }
 
   .card-wrap{
+    position: relative;
     width: 23vw;
     background: #fff;
-    border-radius: 5px;
+    border-radius: 2px;
     border: 5px solid #fff;
     overflow: hidden;
     color: var(--color-text);
@@ -48,9 +49,15 @@
     cursor: pointer;
     transition: all .2s ease-in-out;
   }
+  .course-content {
+    padding: 10px;
+  }
+  .course-content .description{
+    height: 80px;
+  }
 
   .card-wrap:hover{
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
 
 
@@ -78,4 +85,10 @@
 .hide:active {
   background: #00B4D8;
   color: #cdfeaa;
+}
+
+.category-card {
+  position: absolute;
+  top: 20px;
+  left: 30px;
 }

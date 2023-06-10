@@ -8,7 +8,9 @@
 
 
 <h2><%= @course.name %></h2>
+<% if user_signed_in? %>
 <%= render 'courses/subscribe' %>
+<% end %>
 <p>
   <%= @course.description %>
 </p>
@@ -31,4 +33,6 @@
   <% end %>
 </ol>
 <%= render "courses/display_review" %>
+<% if user_signed_in? %>
 <%= render "courses/add_review" %>
+<% end %>
