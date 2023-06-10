@@ -27,12 +27,18 @@ class LessonsController < ApplicationController
 
   def show
     authorize @lesson
-    @topic = Topic.new
-    @last_topics = Topic.where(lesson: @lesson).order("id DESC").last(10)
-    unless subscribed?
+    if !subscribed?
       flash['alert'] = "You need to join the course to view it's contents"
       redirect_to course_path(@lesson.course)
+    else
+      @user_lesson_view = UserLessonView.new
+      @user_lesson_view.user = current_user
+      @user_lesson_view.lesson = @lesson
+      @user_lesson_view.save
+      @topic = Topic.new
+      @last_topics = Topic.where(lesson: @lesson).order("id DESC").last(10)
     end
+
   end
 
   def edit

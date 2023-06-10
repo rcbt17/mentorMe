@@ -3,7 +3,23 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
-    @courses = Course.all
+    @categories = Category.all
+    if params[:category].present?
+      category = Category.where(category: params[:category])
+    end
+    if params[:query].present?
+      if params[:category].present?
+        @courses = Course.search_by_name_and_description(params[:query]).where(category: category)
+      else
+        @courses = Course.search_by_name_and_description(params[:query])
+      end
+    else
+      if params[:category].present?
+        @courses = Course.where(category: category)
+      else
+        @courses = Course.all
+      end
+    end
     policy_scope(Course)
   end
 
@@ -14,10 +30,10 @@ class CoursesController < ApplicationController
     else
       @course_subscriptions = false
     end
+    @highest_viewed = UserLessonView.where(user: current_user, lesson: @course.lessons).order("id DESC").first
     @lessons = Lesson.where(course: @course)
     @review = Review.new
     @reviews = Review.all.where(course: @course).order("id DESC").first(10)
-
   end
 
   def new
@@ -58,7 +74,6 @@ class CoursesController < ApplicationController
     flash[:alert] = "You have successfully deleted a course!"
     redirect_to courses_path, status: :see_other
   end
-
 
   private
 

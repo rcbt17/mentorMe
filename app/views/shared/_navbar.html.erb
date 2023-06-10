@@ -1,5 +1,5 @@
 <% if !current_page?(root_path) %>
-<div class="navbar navbar-expand-sm navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-lewagon border-bottom ">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>MENTORME
     <% end %>
@@ -19,8 +19,9 @@
             <%= link_to "Categories", courses_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Become a mentor", courses_path, class: "nav-link" %>
+            <%= link_to "Become a mentor", new_course_path, class: "nav-link" %>
           </li>
+
           <li class="nav-item dropdown">
           <a href="#" class="nav-link"  id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               My Profile

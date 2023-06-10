@@ -1,0 +1,27 @@
+.chat {
+  position: relative;
+  background-color: rgb(36, 37, 37);
+  margin-top: 55px;
+  height: 40vh;
+  overflow-y: scroll;
+  padding: 10px;
+  padding-bottom: 60px;
+}
+
+.chat-message {
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.author {
+  background-color: $info;
+  color: white;
+  margin: 10px;
+  margin-left: 60px;
+  display: inline-block;
+  max-width: 80%;
+}

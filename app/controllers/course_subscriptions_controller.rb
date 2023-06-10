@@ -21,6 +21,8 @@ class CourseSubscriptionsController < ApplicationController
     @subscription = CourseSubscription.where(user: current_user, course: @course)
     authorize @subscription
     @subscription.first.destroy
+    @user_lesson_views = UserLessonView.where(user: current_user, lesson: @course.lessons)
+    @user_lesson_views.destroy_all
     flash[:notice] = "You have sucessfully unsubscribed from this course"
     redirect_to course_path(@course)
   end
