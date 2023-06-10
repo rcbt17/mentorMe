@@ -1,9 +1,8 @@
 .navbar-lewagon {
   justify-content: space-between;
   z-index:100;
-  background-color: rgba(255, 255, 255, 0);
-  margin-top: 10px;
-  margin-bottom: 10px;
+  background-color: #24173F;
+  border-bottom: 2px solid #781558;
 }
 
 
@@ -15,12 +14,18 @@
   width: 40px;
 }
 .nav-link{
-  color:rgb(7, 108, 241);
+  color:rgb(255, 255, 255);
   text-transform: lowercase;
   margin-left:30px;
+  border-bottom: 3px solid rgba(167, 7, 241, 0);
 }
 .nav-link:hover {
-  color:rgb(167, 7, 241);
+  color:rgb(236, 207, 250);
+  border-bottom: 3px solid rgb(167, 7, 241);
+}
+
+.nav-link:focus {
+  color:rgb(236, 207, 250);
   border-bottom: 3px solid rgb(167, 7, 241);
 }
 
