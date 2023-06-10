@@ -1,18 +1,19 @@
+<h5 class="text-info mt-5 text-end"><i class="fa-solid fa-star"></i> Latest reviews</h5>
 <hr>
-
-<h2> Last 10 reviews</h2>
-
+  <% if @reviews.count.zero? %>
+    <h5>No reviews yet</h5>
+  <% end %>
 <% @reviews.each do |review| %>
-<div class="card">
-    <div class="card-body">
-      <%= review.description %>
-        <% review.stars.times do %>
-        <span class="fa-solid fa-star"></span>
-          <% end  %>
+  <div class="card border-0">
+    <div class="card-body border-start border-primary border-3">
+      <p class="fs-5"><%= review.description %></p>
+      <% review.stars.times do %>
+        <span class="fa-solid fa-star text-warning"></span>
+      <% end  %> <br>
+      <small>
+      <%= review.user.nickname %>
+      <%= review.created_at.strftime("%d/%m/%Y") %>
+      </small>
+    </div>
   </div>
-      <div class="card-body">
-        <%= review.user.nickname %>
-        <%= review.created_at.strftime("%d/%m/%Y") %>
-      </div>
-</div>
 <% end %>

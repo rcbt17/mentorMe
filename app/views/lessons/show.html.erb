@@ -1,43 +1,63 @@
-<h2><%= @lesson.name %></h2>
-<p><%= @lesson.description %></p>
-<hr>
-<div data-controller="plyr">
-  <p>TimeStamp: <span id="demo"></span></p>
-  <%= cl_video_tag(@lesson.video.key,
-  :loop => true, :controls => true,
-  id: "course-player",
-  :fallback_content => "Your browser does not support HTML5 video tags.",
-  :transformation=>[
-  {:height=>400, :width=>790, :crop=>"fill"}
-  ])
-   %>
-</div>
-<hr>
-<h3>Last 10 Topics</h3>
-<% @last_topics.each do |topic| %>
-  <%= link_to course_lesson_topic_path(@lesson.course, @lesson, topic), class: "text-decoration-none" do%>
-    <div class="card bg-info-subtle my-3 border-0 border-5 border-start border-primary-subtle">
-      <div class="card-body">
-        <h5><%= topic.title %> <span class="badge bg-dark"><%= Time.at(topic.timestamp).utc.strftime("%M:%S") %></span></h5>
-        <br>
-        <small class="text-muted"> By <%= topic.user.first_name %> </small>
-        <p><%= topic.content %></p>
+<% title = @lesson.name %>
+<% subtitle = @lesson.description %>
+<% button_action = "" %>
+<% background_img_mini_bar = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"%>
+<%= render "shared/minibanner", title: title, subtitle: subtitle, button_action: button_action, background_img_mini_bar: background_img_mini_bar %>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <ul class="nav  justify-content-between my-3">
+        <li class="nav-item pe-5">
+          <%= link_to "Back to Course", course_path(@lesson.course) %>
+        </li>
+        <li class="nav-item pe-5">
+          <%= link_to "Community Topics", course_lesson_topics_path(@lesson.course, @lesson) %>
+        </li>
+        <li class="nav-item pe-5">
+          <%= link_to "Mentor Contact", course_lesson_topics_path(@lesson.course, @lesson) %>
+        </li>
+      </ul>
+      <div data-controller="plyr">
+        <%= cl_video_tag(@lesson.video.key,
+                        :loop => true, :controls => true,
+                        id: "course-player",
+                        :fallback_content => "Your browser does not support HTML5 video tags.",
+                        :transformation=>[
+                        {:height=>400, :width=>790, :crop=>"fill"}
+                        ]) %>
       </div>
     </div>
+    <div class="col-4">
+    <%= render "lessons/aichat" %>
+    </div>
+  </div>
+  <hr>
+  <h6>Recent User Topics</h6>
+  <% @last_topics.each do |topic| %>
+    <%= link_to course_lesson_topic_path(@lesson.course, @lesson, topic), class: "text-decoration-none" do%>
+      <div class="card bg-info-subtle my-3 border-0 border-5 border-start border-primary-subtle">
+        <div class="card-body">
+          <h5><%= topic.title %> <span class="badge bg-dark"><%= Time.at(topic.timestamp).utc.strftime("%M:%S") %></span></h5>
+          <br>
+          <small class="text-muted"> By <%= topic.user.first_name %> </small>
+          <p><%= topic.content %></p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-<h3> Start a topic on the lesson </h3>
-<%= simple_form_for [@lesson.course, @lesson, @topic] do |f| %>
-  <%= f.input :title %>
-  <%= f.input :content %>
-  <%= f.text_field :timestamp, value: 0, id: "timestamp", type: "hidden"  %>
-  <%= f.submit class: "btn btn-info" %>
-<% end %>
+  <h3> Start a topic on the lesson </h3>
+  <%= simple_form_for [@lesson.course, @lesson, @topic] do |f| %>
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.text_field :timestamp, value: 0, id: "timestamp", type: "hidden"  %>
+    <%= f.submit class: "btn btn-info" %>
+  <% end %>
+</div>
 <script>
-let aud = document.getElementById("course-player");
-aud.ontimeupdate = function () { getVideoTime() };
+  let aud = document.getElementById("course-player");
+  aud.ontimeupdate = function () { getVideoTime() };
 
-function getVideoTime() {
-  document.getElementById("timestamp").value = Math.round(aud.currentTime);
-}
+  function getVideoTime() {
+    document.getElementById("timestamp").value = Math.round(aud.currentTime);
+  }
 </script>

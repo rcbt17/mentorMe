@@ -1,3 +1,4 @@
+<div class="float-end">
 <% if (current_user != @course.user) %>
   <% if CourseSubscription.user_subscribed?(current_user, @course) %>
     <%= link_to "Unsubscribe", course_unsubscribe_path(@course),  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-info" %>
@@ -7,3 +8,4 @@
     <% end %>
   <% end %>
 <% end %>
+</div>

@@ -82,3 +82,5 @@ gem "devise"
 gem "pundit"
 #cloudinary
 gem "cloudinary"
+#pg search
+gem "pg_search"
