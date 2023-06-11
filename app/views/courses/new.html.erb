@@ -1,28 +1,18 @@
-<h2 class= mb-3>Create a new Course</h2>
 
-<%= simple_form_for(@course) do |f| %>
-<div class="card ">
-  <div class="card-body rounded row">
+  <div class="container my-5">
+    <h2 class="text-main">Create a new Course</h2>
+      <p> By uploading your course on MentorME, you instantly gain access to a vast community of learners from all corners of the world. Your knowledge and insights can make a significant impact on individuals seeking to enhance their skills and expand their horizons.</p>
+        <%= simple_form_for(@course) do |f| %>
 
-      <div class="mb-3">
-        <%= f.input :name %>
-      </div>
+          <%= f.input :name, class: "form-control" %>
 
+          <%= f.input :description, class: "form-control" %>
 
-      <div class=" mb-3">
-        <%= f.input :category, :collection => @categories,:label_method => :category,:value_method => :id,:label => "Category" ,:include_blank => false %>
-        </div>
-
-       <div class="mb-3">
-        <%= f.input :description %>
-      </div>
-
-        <div class="mb-3">
-        <%= f.input :poster, as: :file %>
-        </div>
+          <%= f.input :category, collection: @categories, label_method: :category, value_method: :id, label: "Category", include_blank: false, class: "form-control" %>
 
 
-        <%= f.submit class: "button-23 " %>
-  </div>
+          <%= f.input :poster, as: :file, class: "form-control" %>
+
+        <%= f.submit "Create", class: "btn btn-info" %>
+  <% end %>
 </div>
-<% end %>
