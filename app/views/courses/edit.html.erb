@@ -1,9 +1,10 @@
-
-<h2>Edit Course Details</h2>
-
-<%= simple_form_for(@course) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :poster, as: :file %>
-  <%= f.submit %>
-<% end %>
+<div class="container my-5">
+  <h3 class="text-main">Edit Course Details</h3>
+  <p>Please pay attention. Altering your course name and description will also alter the way it can be found by search! </p>
+  <%= simple_form_for(@course) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :poster, as: :file %>
+    <%= f.button :submit, "Update Course", class: "btn btn-info" %>
+  <% end %>
+</div>
