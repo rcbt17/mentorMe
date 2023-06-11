@@ -7,4 +7,5 @@ class Review < ApplicationRecord
   def self.user_reviewed?(user, course)
     !user.reviews.where(course_id: course.id).count.zero?
   end
+
 end
