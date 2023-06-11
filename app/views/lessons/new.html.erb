@@ -1,4 +1,8 @@
-<h2>Add new Lesson</h2>
+<div class="container my-5">
+  <h3 class="text-main">Add new lesson to <%= @course.name %></h3>
+  <p><span class="text-info">Important: </span> Here you can update your course and add lessons to it. It is very important that you add an accurate description,
+   because our AI assistant uses it as context, along with the course description, to give accurate answers. Also, having an accurate description to both your courses
+    and lectures helps your ranking in search! </p>
 
 <%= simple_form_for [@course, @lesson] do |f| %>
   <%= f.input :name %>
@@ -6,3 +10,4 @@
   <%= f.input :video, as: :file %>
   <%= f.submit class: "btn btn-info" %>
 <% end %>
+</div>

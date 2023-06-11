@@ -1,34 +1,62 @@
-<h2>Sign up</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-  
-     <%= f.input :first_name,
+<div class="auth-wrapper mt-5">
+  <div class="login-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <h3 class="mb-2">Sign Up</h3>
+          <hr class="text-muted">
+          <div class="bg-white shadow rounded">
+            <div class="row">
+              <div class="col-md-7 pe-0">
+                <div class="form-left h-100 py-5 px-5">
+                  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                    <%= f.error_notification %>
+                    <div class="form-inputs">
+                      <%= f.input :first_name,
                 input_html: { autocomplete: "First name" }%>
-      <%= f.input :last_name,
+                      <%= f.input :last_name,
                 input_html: { autocomplete: "Last name" }%>
-    <%= f.input :email,
+                      <%= f.input :email,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
-      <%= f.input :nickname,
+                      <%= f.input :nickname,
                 input_html: { autocomplete: "Nickname" }%>
-      <%= f.input :job,
+                      <%= f.input :job,
                 input_html: { autocomplete: "Job" }%>
-    <%= f.input :password,
+                      <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
+                      <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
+                    </div>
+                    <div class="form-actions">
+                      <%= f.button :submit, "Sign up", class: "btn btn-info" %>
+                    </div>
+                  <% end %>
+                  <%= render "devise/shared/links" %>
+                </div>
+              </div>
+              <div class="col-md-5 ps-0 d-none d-md-block">
+                <div class="form-right h-100 bg-info text-white text-center pt-5">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                  <h2 class="fs-4">@mentorME</h2>
+                  <hr>
+                  <p class="text-start my-3 px-3">Thanks for your interest!
+                  We are a startup platform for students to find mentors and for mentors to find students. Our idea is that information should be available to anyone
+                  and anyone should be able to share their knowledge. We are currently in the process of building our platform and are looking for beta testers. If you are interested in joining our beta testing program,
+                   please sign up and you can start using the platform as it is.
+                   <p class="text-start my-3 px-3">For students: It has never been easier to find content on your area of interest. Enjoy Topics, AI-Guided Chat and mentor contacts!</p>
+                   <p class="text-start my-3 px-3">For mentors: It is easy to create content and share it around. Also, live stats incentivize you to build your own community!</p>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
