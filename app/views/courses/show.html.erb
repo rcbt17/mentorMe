@@ -30,7 +30,7 @@
       </p>
     </div>
     <div class="col-6 ps-5">
-      <h3 class="mt-2 text-info path"><%= @course.name %></h3>
+      <h3 class="mt-2 text-main path"><%= @course.name %></h3>
       <p class="description">
         <%= simple_format(@course.description) %>
       </p>
@@ -39,7 +39,7 @@
       <%= render "courses/subscribe" %>
     </div>
   </div>
-  <h5 class="mt-5 text-info text-end"><i class="fa-solid fa-book-open-reader"></i> Lessons </h5>
+  <h5 class="mt-5 text-main text-end"><i class="fa-solid fa-book-open-reader"></i> Lessons </h5>
   <hr>
   <% counter = 1 %>
   <% if @lessons.count.zero? %>
@@ -67,7 +67,7 @@
           </div>
           <div class="col-2 pt-5">
             <% if UserLessonView.user_viewed?(current_user, lesson) %>
-              <% icon_type = "text-info" %>
+              <% icon_type = "text-main" %>
             <% else %>
               <% icon_type = "text-secondary" %>
             <% end %>

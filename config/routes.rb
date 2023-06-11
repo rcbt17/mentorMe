@@ -14,4 +14,6 @@ Rails.application.routes.draw do
 
   # Handling posts
     post '/posts', to: 'posts#create'
+
+  get "/help", to: "pages#help"
 end
