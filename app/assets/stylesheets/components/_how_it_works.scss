@@ -1,0 +1,36 @@
+
+.card-how{
+  height: 300px;
+  width: 300px;
+  background-color: #24183F;
+  border-radius: 7px;
+  margin: 30px;
+  color:white;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  column-gap: 10px;
+}
+
+.card-how h3 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+.icon-font-center {
+text-align: center;
+font-size: 50px;
+vertical-align: middle;
+}
+
+.icon-font-center:hover {
+  color: #A708F1;
+  text-shadow: 0 0 5px #A708F1;
+}
+
+.center-card {
+  margin-left: 212px;
+}
+
+.margin-on-top {
+  margin-top: 40px;
+}
