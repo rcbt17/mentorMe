@@ -3,7 +3,8 @@
   <p>Please pay attention. Altering your course name and description will also alter the way it can be found by search! </p>
   <%= simple_form_for(@course) do |f| %>
     <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.input :description, as: :text, input_html: { class: "tinymce" } %>
+    <%= tinymce %>
     <%= f.input :poster, as: :file %>
     <%= f.button :submit, "Update Course", class: "btn btn-info" %>
   <% end %>

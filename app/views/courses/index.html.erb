@@ -8,7 +8,7 @@
   <% end %>
 <% end %>
   <% subtitle = "We have a library of  #{pluralize(@courses.count, 'course')}" %>
-  <% button_action = link_to "Create Course", new_course_path, class: "btn btn-info"  %>
+  <% button_action = link_to "Create Course", new_course_path, data: { turbolinks: false }, class: "btn btn-info"  %>
   <% background_img_mini_bar = 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80' %>
   <%= render "shared/minibanner", title: title, subtitle: subtitle, button_action: button_action, background_img_mini_bar: background_img_mini_bar %>
   <div class= "container">
@@ -51,7 +51,7 @@
             <div class="text">
               <h5 class= "mt-2 path"><%= link_to course.name,  course_path(course) ,class: "hide" %></h5>
               <p class="description">
-                <%= course.description.first(100) %></p>
+                <%= ActionView::Base.full_sanitizer.sanitize(course.description.first(100)) %></p>
             </div>
             <p class= "text-muted float-start">
               <i class="fa-brands text-main fa-youtube"></i> <%= pluralize(course.lessons.count, 'lesson') %>
