@@ -87,3 +87,7 @@ gem "pundit"
 gem "cloudinary"
 #pg search
 gem "pg_search"
+#tiny_mce
+gem 'tinymce-rails'
+# openai
+gem "ruby-openai"

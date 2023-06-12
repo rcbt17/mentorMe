@@ -2,17 +2,20 @@
 <html>
   <head>
     <title>MentorMe</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://cdn.plyr.io/3.6.2/plyr.css" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= tinymce_assets %>
+    <script type="text/javascript" src="/assets/tinymce.js"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key" referrerpolicy="origin"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   </head>
   <body>
     <%= render "shared/navbar" %>
-      <%= render "shared/flashes" %>
-      <%= yield %>
-      <%= render "shared/footer" %>
+    <%= render "shared/flashes" %>
+    <%= yield %>
+    <%= render "shared/footer" %>
   </body>
 </html>

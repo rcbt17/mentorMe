@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="col-4">
-    <%= render "lessons/aichat" %>
+      <%= render "lessons/aichat" %>
     </div>
   </div>
   <hr>
@@ -38,9 +38,9 @@
       <div class="card bg-info-subtle my-3 border-0 border-5 border-start border-primary-subtle">
         <div class="card-body">
           <h5><%= topic.title %> <span class="badge bg-dark"><%= Time.at(topic.timestamp).utc.strftime("%M:%S") %></span></h5>
-          <br>
           <small class="text-muted"> By <%= topic.user.first_name %> </small>
           <p><%= topic.content %></p>
+          <i class="fa-regular fa-comment-dots"></i> <%= pluralize(topic.posts.count, "reply") %>
         </div>
       </div>
     <% end %>
@@ -54,10 +54,14 @@
   <% end %>
 </div>
 <script>
-  let aud = document.getElementById("course-player");
-  aud.ontimeupdate = function () { getVideoTime() };
+  document.addEventListener("turbo:load", function() {
+    let aud = document.getElementById("course-player");
+    aud.ontimeupdate = function() {
+      getVideoTime();
+    };
 
-  function getVideoTime() {
-    document.getElementById("timestamp").value = Math.round(aud.currentTime);
-  }
+    function getVideoTime() {
+      document.getElementById("timestamp").value = Math.round(aud.currentTime);
+    }
+  });
 </script>

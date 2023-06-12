@@ -36,7 +36,7 @@ class LessonsController < ApplicationController
       @user_lesson_view.lesson = @lesson
       @user_lesson_view.save
       @topic = Topic.new
-      @last_topics = Topic.where(lesson: @lesson).order("id DESC").last(10)
+      @last_topics = Topic.where(lesson: @lesson).order("id DESC").first(10)
     end
 
   end

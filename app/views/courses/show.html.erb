@@ -32,7 +32,7 @@
     <div class="col-6 ps-5">
       <h3 class="mt-2 text-main path"><%= @course.name %></h3>
       <p class="description">
-        <%= simple_format(@course.description) %>
+        <%= raw(@course.description) %>
       </p>
     </div>
     <div class="col-2">
