@@ -46,6 +46,11 @@
           <div class="category-card badge bg-info">
             <i class="fa-solid fa-tags"></i> <%= course.category.category %>
           </div>
+           <% if CourseSubscription.user_subscribed?(current_user, course) %>
+            <div class="category-card-right badge bg-warning">
+             <i class="fa-regular fa-circle-check"></i> subscribed
+            </div>
+            <% end %>
           <%= cl_image_tag course.poster.key, crop: :fill, class: "img-fluid border-bottom" %>
           <div class="course-content">
             <div class="text">
@@ -55,7 +60,8 @@
             </div>
             <p class= "text-muted float-start">
               <i class="fa-brands text-main fa-youtube"></i> <%= pluralize(course.lessons.count, 'lesson') %>
-              <i class="fa-solid text-warning fa-star"></i> <%= course.calculate_review(course) %>
+              <i class="fa-solid text-warning fa-star"></i> <%= course.calculate_review(course).round(2) %>
+              <span class= "text-muted small-text">(<%= pluralize(course.reviews.count, "review") %>)</span>
             </p>
             <%= link_to "View Details", course_path(course), class: "btn btn-sm btn-info float-end mb-3" %>
           </div>
