@@ -15,5 +15,8 @@ Rails.application.routes.draw do
   # Handling posts
     post '/posts', to: 'posts#create'
 
-  get "/help", to: "pages#help"
+    get "/help", to: "pages#help"
+
+    get "/statistics/:id", to: "pages#statistics"
+
 end
