@@ -1,0 +1,37 @@
+<div class= "container">
+<h1>Statistics</h1>
+<p><%= @user_type %></p>
+<hr>
+<p> You have created <%= pluralize(@user.courses.count, "course") %> so far</p>
+
+<% if @user_type == "mentor" %>
+<div class= "card">
+<h3>Categories of your courses</h3>
+<%= pie_chart Course.joins(:category).group("categories.category").count %>
+</div>
+
+<div class= "card">
+<h3>Average reviews x course</h3>
+<% data = @user.courses.map { |course| [course.name, calculate_review(course)] } %>
+
+<%= column_chart data, id: "average-review-chart", xtitle: "Course", ytitle: "Average Review" %>
+
+</div>
+
+  <% @user.courses.each do |course| %>
+    <div class= "card">
+      <strong><%= course.name %></strong>
+      <%= course.description %>
+      <span class= text-muted><%= course.category.category %><span>
+      <i class="fa-brands text-main fa-youtube"></i> <%= pluralize(course.lessons.count, 'lesson') %>
+        <i class="fa-solid text-warning fa-star"></i> <%= course.calculate_review(course) %>
+      <%= link_to "Edit Course", edit_course_path(course), class: "btn btn-info btn-sm" %>
+    <%= link_to "Add Lesson To Course", new_course_lesson_path(course), class: "btn btn-primary btn-sm" %>
+    <%= link_to "Delete", course_path(course), class: "btn btn-danger text-white btn-sm float-end",
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure? Deleting this course will remove all lessons and statistics for others!"}%>
+    </div>
+  <% end %>
+<% else %>
+  <h2>Become a mentor or check your statistics</h2>
+<% end %>
+</div>

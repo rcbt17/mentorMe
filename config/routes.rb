@@ -17,7 +17,13 @@ Rails.application.routes.draw do
   # Handling posts
     post '/posts', to: 'posts#create'
 
+
+    get "/help", to: "pages#help"
+
+    get "/statistics/:id", to: "pages#statistics"
+
   namespace :api do
     post '/chat', to: 'ai#answer'
   end
+
 end
