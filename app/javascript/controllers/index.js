@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
+import AichatController from "./aichat_controller"
+application.register("aichat", AichatController)
+
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
+
 import PlyrController from "./plyr_controller"
 application.register("plyr", PlyrController)
