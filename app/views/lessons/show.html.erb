@@ -3,7 +3,11 @@
 <% button_action = "" %>
 <% background_img_mini_bar = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"%>
 <%= render "shared/minibanner", title: title, subtitle: subtitle, button_action: button_action, background_img_mini_bar: background_img_mini_bar %>
-<div class="container">
+<div class="container" data-controller="aichat">
+  <input type="hidden" data-aichat-target="courseTitle" value="<%= @lesson.course.name %>">
+  <input type="hidden" data-aichat-target="courseDesc" value="<%= @lesson.course.description %>">
+  <input type="hidden" data-aichat-target="lessonTitle" value="<%= @lesson.name %>">
+  <input type="hidden" data-aichat-target="lessonDesc" value="<%= @lesson.description %>">
   <div class="row">
     <div class="col-8">
       <ul class="nav  justify-content-between my-3">
@@ -17,13 +21,17 @@
           <%= link_to "Mentor Contact", course_lesson_topics_path(@lesson.course, @lesson) %>
         </li>
       </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
       <div data-controller="plyr">
         <%= cl_video_tag(@lesson.video.key,
                         :loop => true, :controls => true,
                         id: "course-player",
                         :fallback_content => "Your browser does not support HTML5 video tags.",
                         :transformation=>[
-                        {:height=>400, :width=>790, :crop=>"fill"}
+                        {:crop=>"fill"}
                         ]) %>
       </div>
     </div>
