@@ -60,7 +60,8 @@
             </div>
             <p class= "text-muted float-start">
               <i class="fa-brands text-main fa-youtube"></i> <%= pluralize(course.lessons.count, 'lesson') %>
-              <i class="fa-solid text-warning fa-star"></i> <%= course.calculate_review(course).round(2) %>
+
+              <i class="fa-solid text-warning fa-star"></i> <%= course.calculate_review(course) %>
               <span class= "text-muted small-text">(<%= pluralize(course.reviews.count, "review") %>)</span>
             </p>
             <%= link_to "View Details", course_path(course), class: "btn btn-sm btn-info float-end mb-3" %>

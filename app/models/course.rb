@@ -18,7 +18,7 @@ class Course < ApplicationRecord
       course.reviews.each do |review|
         sum += review.stars
       end
-      return sum / course.reviews.size
+      return (sum / course.reviews.size).round(2)
     end
   end
 

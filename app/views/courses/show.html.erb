@@ -1,7 +1,7 @@
 <% title = @course.name %>
 <% lessons = "<i class='fa-brands text-white fa-youtube'></i> #{pluralize(@course.lessons.count, 'lesson')}" %>
 <% subtitle = "Created by #{@course.user.first_name} #{@course.user.last_name}" %>
-<% rating = "<i class='fa-solid text-warning fa-star'></i> #{@course.calculate_review(@course).round(2)}" %>
+<% rating = "<i class='fa-solid text-warning fa-star'></i> #{@course.calculate_review(@course)}" %>
 <% button_action = raw("#{lessons} | #{rating}") %>
 <% background_img_mini_bar = "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80"%>
 <%= render "shared/minibanner", title: title, subtitle: subtitle, button_action: button_action, background_img_mini_bar: background_img_mini_bar %>
