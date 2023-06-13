@@ -1,8 +1,13 @@
-<div class="chat">
-  <div class="chat-message"> This is LearnyBravo. You can ask me any question and I'll try to guide you through your learning process! </div>
-
-</div>
-<div class="input-group mb-3 border border-dark border-1">
-  <input type="text" class="form-control" placeholder="I need help with" aria-describedby="basic-addon2">
-  <span class="input-group-text" id="basic-addon2"><input type="submit" class="btn btn-info" value="Send"></span>
+<div class="chat-wrap">
+  <div class="chat" data-aichat-target="messages">
+    <div class="chat-message"> This is LearnyBravo. You can ask me any question and I'll try to guide you through your learning process! </div>
+  </div>
+  <form data-action="submit->aichat#start">
+    <div class="input-group mb-3 border border-dark border-1">
+      <input type="text" data-aichat-target="prompt" class="form-control" placeholder="I need help with" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-info" type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </form>
 </div>
