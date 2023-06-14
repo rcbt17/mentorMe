@@ -1,0 +1,27 @@
+.card-how-grey{
+  height: 300px;
+  width: 300px;
+  background-color: #e8e6eb;
+  border-radius: 7px;
+  margin: 30px;
+  color:rgb(13, 13, 13);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  column-gap: 10px;
+}
+
+.card-how-grey h3 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.card-how-grey h2 {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 50px;
+}
+
+.card-how-grey:hover {
+  text-shadow: 0 0 5px #24183F;
+  background-color: #24183F;
+  color: #e8e6eb;
+}
