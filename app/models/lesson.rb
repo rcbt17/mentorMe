@@ -6,4 +6,5 @@ class Lesson < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2 }
   validates :description, presence: true
   validates :video, presence: true
+  has_many :user_lesson_views, dependent: :destroy
 end

@@ -13,18 +13,20 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
-.nav-link{
+.navbar-link{
   color:rgb(255, 255, 255);
   text-transform: lowercase;
   margin-left:30px;
   border-bottom: 3px solid rgba(167, 7, 241, 0);
+  padding-bottom: 5px;
 }
-.nav-link:hover {
+.navbar-link:hover {
   color:rgb(236, 207, 250);
   border-bottom: 3px solid rgb(167, 7, 241);
 }
 
-.nav-link:focus {
+
+.navbar-link:focus {
   color:rgb(236, 207, 250);
   border-bottom: 3px solid rgb(167, 7, 241);
 }

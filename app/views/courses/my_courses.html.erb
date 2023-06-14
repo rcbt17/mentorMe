@@ -1,46 +1,15 @@
-<% if params[:query].present? %>
-  <% title = "Searching #{params[:query].capitalize} Courses" %>
-<% else %>
-  <% if params[:category].present? %>
-    <% title = "Browsing #{params[:category].capitalize} Courses" %>
-  <% else %>
-    <% title = "Browsing all courses" %>
-  <% end %>
-<% end %>
-<% subtitle = "We have a library of  #{pluralize(@courses.count, 'course')}" %>
+<% title = "Courses Manager Dashboard" %>
+<% subtitle = "So far you have created  #{pluralize(@courses.count, 'course')}" %>
 <% button_action = link_to "Create Course", new_course_path, data: { turbo: 'false' }, class: "btn btn-info"  %>
 <% background_img_mini_bar = 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80' %>
 <%= render "shared/minibanner", title: title, subtitle: subtitle, button_action: button_action, background_img_mini_bar: background_img_mini_bar %>
 <div class= "container">
-  <div class="row my-3">
-    <div class="col-6">
-      <%= form_with url: courses_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query,
-            params[:query],
-            class: "form-control",
-            placeholder: "Search by course name or description"
-        %>
-        <%= submit_tag "Search", name: "", class: "btn btn-info" %>
-      <% end %>
-    </div>
-    <div class="col-2 offset-4">
-      <div class="dropdown float-end">
-        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa-solid fa-filter"></i> Categories
-        </button>
-        <ul class="dropdown-menu">
-          <% @categories.each do |category| %>
-            <li><%= link_to category.category, courses_path(category: category.category), class: "dropdown-item" %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
   <div class="row">
-    <main class="grid">
-      <% if @courses.count.zero? %>
-        <h3 class="text-center">No courses found</h3>
+  <% if @courses.count.zero? %>
+        <h3 class="text-center my-5">You have not added any courses to our platform yet. You can start do to so at any moment!</h3>
       <% end %>
+    <main class="grid">
+
       <% @courses.each do |course| %>
         <article class= "card-wrap">
           <div class="category-card badge bg-info">
@@ -67,12 +36,19 @@
               <p class="description">
                 <%= ActionView::Base.full_sanitizer.sanitize(course.description.first(100)) %></p>
             </div>
-            <% if course.user == current_user%>
-              <p class="text-main float-start"><i class="fa-solid fa-at"></i> Your Course</p>
-              <% else %>
-            <p class="text-main float-start"><i class="fa-solid fa-at"></i> <%= course.user.nickname %></p>
+            <%= link_to  new_course_lesson_path(course), class: "btn btn-success text-white mb-3" do %>
+              <i class="fa-solid fa-circle-plus"></i>
             <% end %>
-            <%= link_to "View Details", course_path(course), class: "btn btn-sm btn-info float-end mb-3" %>
+            <%= link_to  course_path(course), class: "btn btn-danger text-white float-end",
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure? Deleting this course will remove all lessons and statistics for others!"} do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+            <%= link_to edit_course_path(course), data: { turbo: 'false' }, class: "btn btn-primary mb-3"  do %>
+              <i class="fa-regular fa-pen-to-square"></i>
+            <% end %>
+            <%= link_to course_path(course), class: "btn btn-info mb-3" do %>
+              <i class="fa-solid fa-circle-info"></i>
+            <% end %>
           </div>
         </article>
       <% end %>

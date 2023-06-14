@@ -23,6 +23,25 @@ class CoursesController < ApplicationController
     policy_scope(Course)
   end
 
+  def my_courses
+    @courses = current_user.courses
+    authorize @courses
+  end
+
+  def live_search
+    query = params[:query]
+
+    if query.present?
+      courses = Course.search_by_name_and_description(query)
+    else
+      courses = Course.all
+    end
+
+    authorize courses
+
+    render json: courses
+  end
+
   def show
     authorize @course
     if user_signed_in?
@@ -72,7 +91,7 @@ class CoursesController < ApplicationController
     authorize @course
     @course.destroy
     flash[:alert] = "You have successfully deleted a course!"
-    redirect_to courses_path, status: :see_other
+    redirect_to courses_my_courses_path, status: :see_other
   end
 
   private
