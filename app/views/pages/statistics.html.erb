@@ -1,59 +1,63 @@
-<%= render "shared/minibanner", title: "Dashboard", subtitle: "Control your courses", button_action: "#{@user_type}", background_img_mini_bar: "https://images.unsplash.com/photo-1542903660-eedba2cda473?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" %>
-
+<%= render "shared/minibanner", title: "My statistics", subtitle: "Control your courses", button_action: "#{@user_type}", background_img_mini_bar: "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" %>
+<% if @user_type == "mentor" %>
 <div class="container">
   <div class="row justify-content-center">
-    <div class="card-how-grey col-4">
-      <h3 class="mt-3">You have created</h3>
-      <h2><%= pluralize(@user.courses.count, "course") %></h2>
-      <div class="text-center mt-5">
-        <i class="fa-solid fa-chalkboard-user icon-font-center mt-3"></i>
-      </div>
+
+    <div class="card-how-grey text-center col-3">
+      <h3 class="mt-4">You have created</h3>
+      <h3 class= "big-data-text"><%= pluralize(@user.courses.count, "course") %></h3>
+      <h3> and</h3>
+      <h3 class= "big-data-text"><%= pluralize(@total_lessons,"lesson") %></h3>
+        <div class="text-center ">
+          <i class="fa-solid fa-chart-simple text-warning text-main  big-icon text-center mt-2"></i>
+        </div>
     </div>
 
-    <div class="card-how-grey col-4">
-      <h3 class="mt-3">total of</h3>
-      <h2>20000</h2>
+    <div class="card-how-grey col-3">
+      <h3 class="mt-4">Total of</h3>
+      <h2 class= "big-data-text"><%= @total_views %></h2>
       <h3>Views</h3>
       <div class="text-center mt-5">
-        <i class="fa-solid fa-chalkboard-user icon-font-center mt-3"></i>
+        <i class="fa-brands text-warning text-main fa-youtube big-icon text-center mt-4"></i>
       </div>
     </div>
 
-    <div class="card-how-grey col-4">
-      <h3 class="mt-3">total of</h3>
-      <h2><%=  @total_lessons %></h2>
-      <h3>lessons</h3>
+    <div class="card-how-grey col-3">
+      <h3 class="mt-4">Total of</h3>
+      <h2 class= "big-data-text"> <%= @total_subscribers %></h2>
+      <h3>subscribers</h3>
       <div class="text-center mt-5">
-        <i class="fa-solid fa-chalkboard-user icon-font-center mt-3"></i>
+        <i class="fa-solid text-warning fa-user-check text-main  big-icon text-center mt-3"></i>
+      </div>
+    </div>
+
+      <div class="card-how-grey col-3">
+      <h3 class="mt-4">Average of</h3>
+      <h2 class= "big-data-text"><%= @average_reviews %></h2>
+      <h3>stars</h3>
+      <div class="text-center mt-5">
+        <i class="fa-solid text-warning fa-star big-icon text-center mt-3"></i>
       </div>
     </div>
   </div>
 
-  <% if @user_type == "mentor" %>
-    <div class="card">
-      <h3>Categories of your courses</h3>
-      <%= pie_chart Course.joins(:category).group("categories.category").count %>
-    </div>
+  <br>
+  <br>
 
-    <div class="card">
-      <h3>Average reviews x course</h3>
+  <div class="row justify-content-center">
+    <div class="card rounded col-6">
+      <h2 class= "text-center">Categories of your courses</h2>
+        <% categories_count = @user.courses.joins(:category).group("categories.category").count %>
+        <%= pie_chart categories_count %>
+      </div>
+
+    <div class="card rounded col-6">
+      <h2 class= "text-center">Average reviews</h2>
       <% data = @user.courses.map { |course| [course.name, calculate_review(course)] } %>
       <%= column_chart data, id: "average-review-chart", xtitle: "Course", ytitle: "Average Review" %>
     </div>
-
-    <% @user.courses.each do |course| %>
-      <div class="card">
-        <strong><%= course.name %></strong>
-        <%= course.description %>
-        <span class="text-muted"><%= course.category.category %></span>
-        <i class="fa-brands text-main fa-youtube"></i> <%= pluralize(course.lessons.count, 'lesson') %>
-        <i class="fa-solid text-warning fa-star"></i> <%= course.calculate_review(course) %>
-        <%= link_to "Delete", course_path(course), class: "btn btn-danger text-white btn-sm float-end", data: { turbo_method: :delete, turbo_confirm: "Are you sure? Deleting this course will remove all lessons and statistics for others!" } %>
-        <%= link_to "Edit Course", edit_course_path(course), class: "btn btn-info btn-sm float-end" %>
-        <%= link_to "Add Lesson To Course", new_course_lesson_path(course), class: "btn btn-primary btn-sm float-end" %>
-      </div>
+    <% else %>
+      <h2 class= "text-center m-5">Become a mentor for check your statistics 📊📈</h2>
     <% end %>
-  <% else %>
-    <h2>Become a mentor for check your statistics</h2>
-  <% end %>
+  </div>
 </div>
