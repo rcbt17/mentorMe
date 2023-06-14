@@ -6,12 +6,15 @@ class PagesController < ApplicationController
   def home
   end
 
+
+
   def help
   end
 
   def statistics
     @user = User.find(params[:id])
     @user_type = "student"
+    @total_lessons = calculate_total_lessons
     if @user.courses.count.positive?
       @user_type = "mentor"
     else
@@ -29,5 +32,13 @@ class PagesController < ApplicationController
       end
       return (sum / course.reviews.size).round(2)
     end
+  end
+
+  def calculate_total_lessons
+    total_lessons = 0
+    @user.courses.each do |course|
+      total_lessons += course.lessons.count
+    end
+    total_lessons
   end
 end
