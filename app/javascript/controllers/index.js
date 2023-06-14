@@ -10,5 +10,8 @@ application.register("aichat", AichatController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import LiveSearchController from "./live_search_controller"
+application.register("live-search", LiveSearchController)
+
 import PlyrController from "./plyr_controller"
 application.register("plyr", PlyrController)

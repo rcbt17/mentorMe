@@ -23,6 +23,14 @@ class CoursePolicy < ApplicationPolicy
     edit?
   end
 
+  def my_courses?
+    true
+  end
+
+  def live_search?
+    true
+  end
+
   def destroy?
     record.user == user
   end

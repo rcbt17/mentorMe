@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "/help", to: "pages#help"
 
+  get '/courses/search', to: 'courses#live_search'
+  get '/courses/my_courses', to: 'courses#my_courses'
+
   resources :courses do
     resources :lessons, only: %i[index new create show] do
       resources :topics, only: %i[create show]
@@ -16,9 +19,6 @@ Rails.application.routes.draw do
 
   # Handling posts
     post '/posts', to: 'posts#create'
-
-
-    get "/help", to: "pages#help"
 
     get "/statistics/:id", to: "pages#statistics"
 

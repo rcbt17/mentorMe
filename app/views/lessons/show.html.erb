@@ -1,75 +1,119 @@
 <% title = @lesson.name %>
 <% subtitle = @lesson.description %>
 <% button_action = "" %>
-<% background_img_mini_bar = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"%>
+<% background_img_mini_bar = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" %>
 <%= render "shared/minibanner", title: title, subtitle: subtitle, button_action: button_action, background_img_mini_bar: background_img_mini_bar %>
+
 <div class="container" data-controller="aichat">
   <input type="hidden" data-aichat-target="courseTitle" value="<%= @lesson.course.name %>">
   <input type="hidden" data-aichat-target="courseDesc" value="<%= @lesson.course.description %>">
   <input type="hidden" data-aichat-target="lessonTitle" value="<%= @lesson.name %>">
   <input type="hidden" data-aichat-target="lessonDesc" value="<%= @lesson.description %>">
-  <div class="row">
-    <div class="col-8">
-      <ul class="nav  justify-content-between my-3">
-        <li class="nav-item pe-5">
-          <%= link_to "Back to Course", course_path(@lesson.course) %>
-        </li>
-        <li class="nav-item pe-5">
-          <%= link_to "Community Topics", course_lesson_topics_path(@lesson.course, @lesson) %>
-        </li>
-        <li class="nav-item pe-5">
-          <%= link_to "Mentor Contact", course_lesson_topics_path(@lesson.course, @lesson) %>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-8">
-      <div data-controller="plyr">
-        <%= cl_video_tag(@lesson.video.key,
-                        :loop => true, :controls => true,
-                        id: "course-player",
-                        :fallback_content => "Your browser does not support HTML5 video tags.",
-                        :transformation=>[
-                        {:crop=>"fill"}
-                        ]) %>
-      </div>
-    </div>
-    <div class="col-4">
-      <%= render "lessons/aichat" %>
-    </div>
-  </div>
-  <hr>
-  <h6>Recent User Topics</h6>
-  <% @last_topics.each do |topic| %>
-    <%= link_to course_lesson_topic_path(@lesson.course, @lesson, topic), class: "text-decoration-none" do%>
-      <div class="card bg-info-subtle my-3 border-0 border-5 border-start border-primary-subtle">
-        <div class="card-body">
-          <h5><%= topic.title %> <span class="badge bg-dark"><%= Time.at(topic.timestamp).utc.strftime("%M:%S") %></span></h5>
-          <small class="text-muted"> By <%= topic.user.first_name %> </small>
-          <p><%= topic.content %></p>
-          <i class="fa-regular fa-comment-dots"></i> <%= pluralize(topic.posts.count, "reply") %>
+
+  <ul class="nav nav-tabs my-3">
+    <li class="nav-item">
+      <%= link_to "Video", "#videoTab", class: "nav-link active text-main", "data-bs-toggle": "tab" %>
+    </li>
+    <li class="nav-item ">
+      <%= link_to "Community Topics", "#topicsTab", class: "nav-link  text-main", "data-bs-toggle": "tab" %>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="videoTab">
+      <div class="row">
+        <div class="col-8">
+          <div data-controller="plyr">
+            <%= cl_video_tag(@lesson.video.key,
+                            loop: true, controls: true,
+                            id: "course-player",
+                            fallback_content: "Your browser does not support HTML5 video tags.",
+                            transformation: [{ crop: "fill" }]
+                            ) %>
+          </div>
+        </div>
+        <div class="col-4">
+          <%= render "lessons/aichat" %>
         </div>
       </div>
-    <% end %>
-  <% end %>
-  <h3> Start a topic on the lesson </h3>
-  <%= simple_form_for [@lesson.course, @lesson, @topic] do |f| %>
-    <%= f.input :title %>
-    <%= f.input :content %>
-    <%= f.text_field :timestamp, value: 0, id: "timestamp", type: "hidden"  %>
-    <%= f.submit class: "btn btn-info" %>
-  <% end %>
+    </div>
+    <div class="tab-pane fade" id="topicsTab">
+    <h3>Start a topic on the lesson</h3>
+      <%= simple_form_for [@lesson.course, @lesson, @topic] do |f| %>
+        <%= f.input :title %>
+        <%= f.input :content %>
+        <%= f.text_field :timestamp, value: 0, id: "timestamp", type: "hidden" %>
+        <%= f.submit class: "btn btn-info" %>
+      <% end %>
+      <hr>
+      <h6>Community Forums</h6>
+      <% @topics.each do |topic| %>
+        <%= link_to course_lesson_topic_path(@lesson.course, @lesson, topic), class: "text-decoration-none" do %>
+          <div class="card bg-info-subtle my-3 border-0 border-5 border-start border-primary-subtle">
+            <div class="card-body">
+              <h5><%= topic.title %> <span class="badge bg-dark"><%= Time.at(topic.timestamp).utc.strftime("%M:%S") %></span></h5>
+              <small class="text-muted">By <%= topic.user.first_name %></small>
+              <p><%= topic.content %></p>
+              <i class="fa-regular fa-comment-dots"></i> <%= pluralize(topic.posts.count, "reply") %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="contactTab">
+      <!-- Content for Mentor Contact tab goes here -->
+    </div>
+  </div>
 </div>
-<script>
-  document.addEventListener("turbo:load", function() {
-    let aud = document.getElementById("course-player");
-    aud.ontimeupdate = function() {
-      getVideoTime();
-    };
 
-    function getVideoTime() {
-      document.getElementById("timestamp").value = Math.round(aud.currentTime);
-    }
+<script>
+  document.addEventListener("turbo:load", function () {
+    const navLinks = document.querySelectorAll(".nav-link[data-bs-toggle='tab']");
+    const tabContents = document.querySelectorAll(".tab-pane");
+    const videoPlayer = document.getElementById("course-player");
+    const timestampInput = document.getElementById("timestamp");
+
+    navLinks.forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = this.getAttribute("href");
+        navLinks.forEach(function (navLink) {
+          navLink.classList.remove("active");
+        });
+        tabContents.forEach(function (tabContent) {
+          tabContent.classList.remove("show", "active");
+        });
+        this.classList.add("active");
+        document.querySelector(target)?.classList.add("show", "active");
+      });
+    });
+
+    videoPlayer.addEventListener("timeupdate", function () {
+      const currentTime = Math.floor(videoPlayer.currentTime);
+      timestampInput.value = currentTime;
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener("turbo:load", function () {
+    const navLinks = document.querySelectorAll(".nav-link[data-bs-toggle='tab']");
+    const tabContents = document.querySelectorAll(".tab-pane");
+
+    navLinks.forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = this.getAttribute("href");
+        navLinks.forEach(function (navLink) {
+          navLink.classList.remove("active");
+        });
+        tabContents.forEach(function (tabContent) {
+          tabContent.classList.remove("show", "active");
+        });
+        this.classList.add("active");
+        document.querySelector(target)?.classList.add("show", "active");
+      });
+    });
   });
 </script>
