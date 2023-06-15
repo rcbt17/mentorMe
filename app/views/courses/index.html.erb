@@ -68,7 +68,13 @@
                 <%= ActionView::Base.full_sanitizer.sanitize(course.description.first(100)) %></p>
             </div>
             <% if course.user == current_user%>
-              <p class="text-main float-start"><i class="fa-solid fa-at"></i> Your Course</p>
+              <p class="text-main float-start"><i class="fa-solid fa-at"></i> Your Course
+              <%= link_to statistics_path(course.user) do %>
+              <i class="fa-solid fa-chart-simple"></i>
+              <% end %>
+
+              </p>
+
               <% else %>
             <p class="text-main float-start"><i class="fa-solid fa-at"></i> <%= course.user.nickname %></p>
             <% end %>
