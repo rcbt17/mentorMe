@@ -1,58 +1,75 @@
-<%= render "shared/minibanner", title: "My statistics", subtitle: "Control your courses", button_action: "#{@user_type}", background_img_mini_bar: "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" %>
+<%= render "shared/minibanner", title: " Statistics of #{ @user.first_name} #{@user.last_name}" , subtitle: "Control your #{pluralize(@user.courses.count, "course")}", button_action: "#{@user_type}", background_img_mini_bar: "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" %>
+
 <% if @user_type == "mentor" %>
-<div class="container">
-  <div class="row justify-content-center">
+<div class="container-fluid">
 
-    <div class="card-how-grey text-center col-3">
-      <h3 class="mt-4">You have created</h3>
-      <h3 class= "big-data-text"><%= pluralize(@user.courses.count, "course") %></h3>
-      <h3> and</h3>
-      <h3 class= "big-data-text"><%= pluralize(@total_lessons,"lesson") %></h3>
-        <div class="text-center ">
-          <i class="fa-solid fa-chart-simple text-warning text-main  big-icon text-center mt-2"></i>
+  <div class="row justify-content-center mt-4">
+    <div class="card-how-grey text-center">
+      <div class="row">
+        <div class="d-flex align-items-center col-4">
+          <i class="fa-solid fa-chart-pie text-warning text-main big-icon text-center"></i>
         </div>
-    </div>
-
-    <div class="card-how-grey col-3">
-      <h3 class="mt-4">Total of</h3>
-      <h2 class= "big-data-text"><%= @total_views %></h2>
-      <h3>Views</h3>
-      <div class="text-center mt-5">
-        <i class="fa-brands text-warning text-main fa-youtube big-icon text-center mt-4"></i>
+        <div class="col-8">
+          <h3 class="mt-4">Total of</h3>
+          <h2 class="big-data-text"><%= @total_lessons %></h3>
+          <h3>lessons</h3>
+        </div>
       </div>
     </div>
 
     <div class="card-how-grey col-3">
-      <h3 class="mt-4">Total of</h3>
-      <h2 class= "big-data-text"> <%= @total_subscribers %></h2>
-      <h3>subscribers</h3>
-      <div class="text-center mt-5">
-        <i class="fa-solid text-warning fa-user-check text-main  big-icon text-center mt-3"></i>
+      <div class="row">
+        <div class="d-flex align-items-center  col-4">
+          <i class="fa-solid fa-users-viewfinder text-warning text-main big-icon text-center"></i>
+        </div>
+        <div class="col-8">
+          <h3 class="mt-4">Total of</h3>
+          <h2 class="big-data-text"><%= @total_views %></h2>
+          <h3>Views</h3>
+        </div>
       </div>
     </div>
 
-      <div class="card-how-grey col-3">
-      <h3 class="mt-4">Average of</h3>
-      <h2 class= "big-data-text"><%= @average_reviews %></h2>
-      <h3>stars</h3>
-      <div class="text-center mt-5">
-        <i class="fa-solid text-warning fa-star big-icon text-center mt-3"></i>
+    <div class="card-how-grey col-3">
+      <div class="row">
+        <div class="d-flex align-items-center  col-4">
+          <i class="fa-solid fa-users text-warning  text-main big-icon text-center"></i>
+        </div>
+        <div class="col-8">
+          <h3 class="mt-4">Total of</h3>
+          <h2 class="big-data-text"><%= @total_subscribers %></h2>
+          <h3>subscribers</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-how-grey col-3">
+      <div class="row">
+        <div class="d-flex align-items-center  col-3">
+          <i class="fa-solid fa-ranking-star text-warning fa-star big-icon text-center"></i>
+        </div>
+        <div class="col-9">
+          <h3 class="mt-4">Average of</h3>
+          <h2 class="big-data-text"><%= @average_reviews %></h2>
+          <h3>stars</h3>
+        </div>
       </div>
     </div>
   </div>
+</div>
 
   <br>
   <br>
 
-  <div class="row justify-content-center">
-    <div class="card rounded col-6">
-      <h2 class= "text-center">Categories of your courses</h2>
+  <div class="row justify-content-around">
+    <div class="card rounded col-5">
+      <h3 class= "text-center grey-txt mt-3">Categories of your courses</h3>
         <% categories_count = @user.courses.joins(:category).group("categories.category").count %>
         <%= pie_chart categories_count %>
       </div>
 
-    <div class="card rounded col-6">
-      <h2 class= "text-center">Average reviews</h2>
+    <div class="card rounded col-5">
+      <h3 class= "text-center grey-txt mt-3">Average reviews</h3>
       <% data = @user.courses.map { |course| [course.name, calculate_review(course)] } %>
       <%= column_chart data, id: "average-review-chart", xtitle: "Course", ytitle: "Average Review" %>
     </div>
