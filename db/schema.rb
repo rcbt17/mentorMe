@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_080515) do
     t.string "name"
     t.string "description"
     t.string "video_url"
-    t.string "post_content"
+    t.text "post_content"
     t.string "views"
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false

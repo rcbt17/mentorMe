@@ -12,7 +12,7 @@
 <% background_img_mini_bar = 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80' %>
 <%= render "shared/minibanner", title: title, subtitle: subtitle, button_action: button_action, background_img_mini_bar: background_img_mini_bar %>
 <div class= "container">
-  <div class="row my-3">
+  <div class="row my-4">
     <div class="col-6">
       <%= form_with url: courses_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query,

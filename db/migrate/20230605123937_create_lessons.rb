@@ -4,7 +4,7 @@ class CreateLessons < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :description
       t.string :video_url
-      t.string :post_content
+      t.text :post_content
       t.string :views
       t.references :course, null: false, foreign_key: true
 
