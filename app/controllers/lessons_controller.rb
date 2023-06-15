@@ -62,7 +62,7 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description, :video, :course_id)
+    params.require(:lesson).permit(:name, :description, :video, :course_id, :post_content)
   end
 
   def subscribed?

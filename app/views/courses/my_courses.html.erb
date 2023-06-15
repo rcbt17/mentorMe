@@ -8,7 +8,7 @@
   <% if @courses.count.zero? %>
         <h3 class="text-center my-5">You have not added any courses to our platform yet. You can start do to so at any moment!</h3>
       <% end %>
-    <main class="grid">
+    <main class="grid my-4">
 
       <% @courses.each do |course| %>
         <article class= "card-wrap">
@@ -33,10 +33,10 @@
             </p>
             <div class="text">
               <h5 class= "mt-2 path"><%= link_to course.name,  course_path(course) ,class: "hide" %></h5>
-              <p class="description">
+              <p class="description mb-5">
                 <%= ActionView::Base.full_sanitizer.sanitize(course.description.first(100)) %></p>
             </div>
-            <%= link_to  new_course_lesson_path(course), class: "btn btn-success text-white mb-3" do %>
+            <%= link_to  new_course_lesson_path(course), data: { turbo: 'false' }, class: "btn btn-dark text-white mb-3" do %>
               <i class="fa-solid fa-circle-plus"></i>
             <% end %>
             <%= link_to  course_path(course), class: "btn btn-danger text-white float-end",

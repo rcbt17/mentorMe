@@ -16,8 +16,8 @@ class TopicsController < ApplicationController
     @topic.user = current_user
     if @topic.save
       ai_answer = OpenaiService.new("DON'T ANSWER ANYTHING OUTSITE OF THIS CONTEXT! At the end make a really funny joke about the subject on a new paragraph with one empty line before it. Also introduce the joke in the context. Your name is LearnyBravo and you are working for @mentorme. For context, you are called from a page teaching #{lesson.course} and right now they are at lesson #{lesson.name}. The description of
-        the lesson is #{lesson.description}. You can only reply once. The user created a topic on this problem, please give him a detaiiled answer: #{@topic.title} => content: #{@topic.content}").call
-      post = Post.new(content: ai_answer, topic: @topic, user: User.find_by(nickname: "LearnyBravo"))
+        the lesson is #{lesson.description} and it might have some text aswell here: #{lesson.post_content}. You can only reply once. The user created a topic on this problem, please give him a detaiiled answer: #{@topic.title} => content: #{@topic.content}").call
+      post = Post.new(content: ai_answer, topic: @topic, user: User.find_by(email: "learnybravo@mentorme.wiki"))
       post.save
       redirect_to course_lesson_topic_path(lesson.course, lesson, @topic)
     else
