@@ -76,7 +76,11 @@
               </p>
 
               <% else %>
-            <p class="text-main float-start"><i class="fa-solid fa-at"></i> <%= course.user.nickname %></p>
+            <p class="text-main float-start"><i class="fa-solid fa-at"></i> <%= course.user.nickname %>
+              <%= link_to statistics_path(course.user) do %>
+              <i class="fa-solid fa-chart-simple"></i>
+              <% end %>
+            </p>
             <% end %>
             <%= link_to "View Details", course_path(course), class: "btn btn-sm btn-info float-end mb-3" %>
           </div>
