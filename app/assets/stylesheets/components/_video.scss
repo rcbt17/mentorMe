@@ -8,8 +8,10 @@
   top: 0;
   bottom: 0;
   z-index: -1;
+  overflow-x: hidden;
 }
 
 .overlay{
   padding-top:28vh;
+  overflow-x: hidden;
 }
