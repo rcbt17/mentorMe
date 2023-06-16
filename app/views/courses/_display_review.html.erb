@@ -4,7 +4,7 @@
     <h5>No reviews yet</h5>
   <% end %>
 <% @reviews.each do |review| %>
-  <div class="card border-0">
+  <div class="card border-0 mt-1">
     <div class="card-body border-start border-primary border-3">
       <p class="fs-5"><%= review.description %></p>
       <% review.stars.times do %>

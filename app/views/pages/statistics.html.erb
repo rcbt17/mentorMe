@@ -1,4 +1,11 @@
-<%= render "shared/minibanner", title: " Statistics of #{ @user.first_name} #{@user.last_name}" , subtitle: "User has created a total of #{pluralize(@user.courses.count, "course")}", button_action: "#{@user_type}", background_img_mini_bar: "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" %>
+<% if current_user == @user %>
+  <% mini_title = "Personal Statistics" %>
+  <% mini_subtitle = "You have created a total of #{pluralize(@user.courses.count, "course")}" %>
+<% else %>
+  <% mini_title = " Statistics of #{ @user.first_name} #{@user.last_name}" %>
+  <% mini_subtitle = "User has created a total of #{pluralize(@user.courses.count, "course")}" %>
+<% end %>
+<%= render "shared/minibanner", title: mini_title , subtitle: mini_subtitle, button_action: "#{@user_type}", background_img_mini_bar: "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1774&q=80" %>
 
 <% if @user_type == "mentor" %>
 <div class="container-fluid">
